@@ -1,0 +1,19 @@
+<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/login.html-->
+
+{% extends 'folder_aplikacji/base.html' %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Logowanie</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Zaloguj się</button>
+    </form>
+    <div class="mt-3">
+        <p>Nie masz konta? <a href="{% url 'register' %}">Zarejestruj się</a></p>
+    </div>
+</div>
+{% endblock %}

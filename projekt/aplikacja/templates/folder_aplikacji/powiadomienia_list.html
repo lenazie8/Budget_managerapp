@@ -1,0 +1,28 @@
+<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/powiadomienia_list.html-->
+
+{% extends 'folder_aplikacji/base.html' %}
+
+{% block title %}Powiadomienia{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Powiadomienia</h2>
+    <ul class="list-group">
+        {% for powiadomienie in powiadomienia %}
+            <li class="list-group-item {% if not powiadomienie.przeczytane %}list-group-item-warning{% endif %}">
+                {{ powiadomienie.tresc }}
+                <small class="text-muted">{{ powiadomienie.data_utworzenia }}</small>
+                <div class="float-right">
+                    {% if not powiadomienie.przeczytane %}
+                        <a href="{% url 'oznacz_powiadomienie_przeczytane' powiadomienie.pk %}" class="btn btn-sm btn-success">Oznacz jako przeczytane</a>
+                    {% endif %}
+                    <form method="post" action="{% url 'powiadomienie_usun' powiadomienie.pk %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger">Usuń</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

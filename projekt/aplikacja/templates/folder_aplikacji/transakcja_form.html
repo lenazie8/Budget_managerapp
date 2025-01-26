@@ -1,0 +1,15 @@
+<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/transakcja_form.html-->
+{% extends 'folder_aplikacji/base.html' %}
+
+{% block title %}Dodaj Transakcję{% endblock %}
+
+{% block content %}
+<div class="container mt-1">
+    <h2 class="mb-3">Dodaj Transakcję</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/budzet_confirm_delete.html-->
+
+{% extends 'folder_aplikacji/base.html' %}
+
+{% block title %}Usuń Budżet{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Usuń Budżet</h2>
+    <p>Czy na pewno chcesz usunąć budżet "{{ budzet.kategoria }}" na miesiąc "{{ budzet.get_miesiac_display }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Usuń</button>
+        <a href="{% url 'budzety_list' %}" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>
+{% endblock %}
