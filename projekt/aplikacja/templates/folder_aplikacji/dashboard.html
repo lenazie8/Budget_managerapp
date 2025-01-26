@@ -1,0 +1,99 @@
+<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/dashboard.html-->
+{% extends 'folder_aplikacji/base.html' %}
+
+{% block title %}Zarządzaj Swoimi Finansami{% endblock %}
+
+{% block content %}
+<div class="container mt-2">
+    <h2>Twoje Finanse</h2>
+    <p>Podsumowanie Twoich Finansów:</p>
+
+    <h3 class="mt-4">Budżety</h3>
+    <table class="table table-bordered mt-2">
+        <thead class="thead-dark">
+            <tr>
+                <th>Kategoria</th>
+                <th>Miesiąc</th>
+                <th>Limit</th>
+                <th>Wydatki</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for budzet in budzety %}
+                <tr class="{% if budzet.przekroczony %}table-danger{% endif %}">
+                    <td>{{ budzet.kategoria }}</td>
+                    <td>{{ budzet.get_miesiac_display }}</td>
+                    <td>{{ budzet.limit }} zł</td>
+                    <td>{{ budzet.suma_transakcji }} zł</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">Brak budżetów do wyświetlenia.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 class="mt-4">Cele Oszczędnościowe</h3>
+    <table class="table table-bordered mt-2">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nazwa</th>
+                <th>Obecna Kwota</th>
+                <th>Kwota Docelowa</th>
+                <th>Data Osiągnięcia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cel in cele %}
+                <tr class="{% if cel.data_osiagniecia %}table-success{% endif %}">
+                    <td>{{ cel.nazwa }}</td>
+                    <td>{{ cel.obecna_kwota }} zł</td>
+                    <td>{{ cel.kwota_docelowa }} zł</td>
+                    <td>{% if cel.data_osiagniecia %}{{ cel.data_osiagniecia|date:"d/m/Y" }}{% endif %}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">Brak celów oszczędnościowych do wyświetlenia.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 class="mt-4">Transakcje</h3>
+    <table class="table table-bordered mt-2">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    <form method="get" class="form-inline">
+                        <select name="typ" class="form-control" onchange="this.form.submit()">
+                            <option value="">Wszystkie</option>
+                            <option value="Przychód" {% if typ_filter == 'Przychód' %}selected{% endif %}>Przychód</option>
+                            <option value="Wydatek" {% if typ_filter == 'Wydatek' %}selected{% endif %}>Wydatek</option>
+                        </select>
+                    </form>
+                </th>
+                <th>Kwota</th>
+                <th>Opis</th>
+                <th>Data</th>
+                <th>Kategoria</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transakcja in transakcje %}
+                <tr>
+                    <td>{{ transakcja.typ }}</td>
+                    <td>{{ transakcja.kwota }} zł</td>
+                    <td>{{ transakcja.opis }}</td>
+                    <td>{{ transakcja.data|date:"d/m/Y" }}</td>
+                    <td>{{ transakcja.kategoria }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">Brak transakcji do wyświetlenia.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

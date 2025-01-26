@@ -1,0 +1,39 @@
+<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/cele_list.html-->
+<!-- Compare this snippet from projekt/aplikacja/tamplates/folder_aplikacji/cele_list.html: -->
+{% extends 'folder_aplikacji/base.html' %}
+
+{% block title %}Cele Oszczędnościowe{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Twoje Cele Oszczędnościowe</h2>
+    <a href="{% url 'cel_add' %}" class="btn btn-primary mb-3">Dodaj Cel</a>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nazwa</th>
+                <th>Kwota Docelowa</th>
+                <th>Uzbierana Kwota</th>
+                <th>Czynności</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cel in cele %}
+            <tr>
+                <td>{{ cel.nazwa }}</td>
+                <td>{{ cel.kwota_docelowa }} zł</td>
+                <td>{{ cel.obecna_kwota }} zł</td>
+                <td>
+                    <a href="{% url 'cel_edit' cel.pk %}" class="btn btn-success btn-sm">Edytuj</a>
+                    <a href="{% url 'cel_delete' cel.pk %}" class="btn btn-danger btn-sm">Usuń</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Brak celów do wyświetlenia.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

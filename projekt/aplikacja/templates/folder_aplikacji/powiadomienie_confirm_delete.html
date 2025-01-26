@@ -1,0 +1,17 @@
+<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/powiadomienia_confirm_delete.html-->
+
+{% extends 'folder_aplikacji/base.html' %}
+
+{% block title %}Usuń Powiadomienie{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Czy na pewno chcesz usunąć to powiadomienie?</h2>
+    <p>{{ powiadomienie.tresc }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Usuń</button>
+        <a href="{% url 'powiadomienia_list' %}" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>
+{% endblock %}

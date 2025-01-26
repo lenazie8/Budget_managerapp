@@ -1,0 +1,47 @@
+<!-- filepath: /Users/zvzeq/Desktop/Zal/Zal/projekt_django/aplikacja/templates/folder_aplikacji/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Moja Aplikacja{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header class="bg-dark text-white p-3">
+        <div class="container">
+            <h1 class="h3">Zarządzaj Swoimi Finansami</h1>
+            <nav class="nav">
+                {% if user.is_authenticated %}
+                    <a class="nav-link text-white" href="{% url 'dashboard' %}">Strona Główna</a>
+                    <a class="nav-link text-white" href="{% url 'cele_list' %}">Twoje Cele</a>
+                    <a class="nav-link text-white" href="{% url 'budzety_list' %}">Zarządzaj Budżetami</a>
+                    <a class="nav-link text-white" href="{% url 'transakcja_add' %}">Wprowadź Transakcję</a>
+                    <a class="nav-link text-white" href="{% url 'powiadomienia_list' %}">Powiadomienia</a>
+                    <form method="post" action="{% url 'logout' %}" class="nav-link p-0">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link nav-link text-white">Wyloguj</button>
+                    </form>
+                {% else %}
+                    <a class="nav-link text-white" href="{% url 'login' %}">Logowanie</a>
+                    <a class="nav-link text-white" href="{% url 'register' %}">Rejestracja</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+    <main class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="bg-dark text-white p-3 mt-4">
+        <div class="container text-center">
+            <p>&copy; 2025 PAW-SWPS | Project</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

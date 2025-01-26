@@ -1,0 +1,14 @@
+<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/home.html-->
+
+{% extends 'folder_aplikacji/base.html' %}
+
+{% block title %}Strona Główna{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Witamy w Aplikacji do Zarządzania Finansami</h2>
+    <p>Zaloguj się lub zarejestruj, aby uzyskać dostęp do pełnej funkcjonalności.</p>
+    <a href="{% url 'login' %}" class="btn btn-primary">Zaloguj się</a>
+    <a href="{% url 'register' %}" class="btn btn-primary">Zarejestruj się</a>
+</div>
+{% endblock %}

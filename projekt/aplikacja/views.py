@@ -43,6 +43,8 @@ def dashboard(request):
         'typ_filter': typ_filter,
         'query': query,
     })
+def dashboard_view(request):
+    return render(request, 'folder_aplikacji/dashboard.html')
 
 def home(request):
     if request.user.is_authenticated:

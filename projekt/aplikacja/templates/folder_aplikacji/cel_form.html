@@ -1,0 +1,16 @@
+<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/cel_form.html-->
+
+{% extends 'folder_aplikacji/base.html' %}
+
+{% block title %}Dodaj/Edytuj Cel{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{% if form.instance.pk %}Edytuj Cel{% else %}Dodaj Cel{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Zapisz{% else %}Dodaj{% endif %}</button>
+    </form>
+</div>
+{% endblock %}
