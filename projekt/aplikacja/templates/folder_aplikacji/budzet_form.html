@@ -1,12 +1,10 @@
-<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/budzet_from.html-->
-
 {% extends 'folder_aplikacji/base.html' %}
 
-{% block title %}Dodaj/Edytuj Cel{% endblock %}
+{% block title %}Dodaj/Edytuj Budżet{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2>{% if form.instance.pk %}Edytuj Cel{% else %}Dodaj Cel{% endif %}</h2>
+    <h2>{% if form.instance.pk %}Edytuj Budżet{% else %}Dodaj Budżet{% endif %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

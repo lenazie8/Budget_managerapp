@@ -1,12 +1,33 @@
-<!-- filepath: //Users/lenaziemlewska/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/studia_P&I/aplikacje webowe/proj_zal/Budget_managerapp/projekt/aplikacja/templates/folder_aplikacji/dashboard.html-->
 {% extends 'folder_aplikacji/base.html' %}
 
 {% block title %}Zarządzaj Swoimi Finansami{% endblock %}
 
 {% block content %}
 <div class="container mt-2">
-    <h2>Twoje Finanse</h2>
-    <p>Podsumowanie Twoich Finansów:</p>
+    <h1>Twoje Finanse</h1>
+    <h3 class="mt-4">Podsumowanie Twoich Finansów</h3>
+    <table class="table table-bordered mt-2">
+        <thead class="thead-dark">
+            <tr>
+                <th>Rodzaj</th>
+                <th>Suma</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Stan Konta</td>
+                <td class="{% if stan_konta < 0 %}text-danger{% elif stan_konta > 0 %}text-success{% else %}text-dark{% endif %}">{{ stan_konta }} zł</td>
+            </tr>
+            <tr>
+                <td>Przychody</td>
+                <td>{{ suma_przychodow }} zł</td>
+            </tr>
+            <tr>
+                <td>Wydatki</td>
+                <td>{{ suma_wydatkow }} zł</td>
+            </tr>
+        </tbody>
+    </table>
 
     <h3 class="mt-4">Budżety</h3>
     <table class="table table-bordered mt-2">
