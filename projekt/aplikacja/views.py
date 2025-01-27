@@ -36,12 +36,19 @@ def dashboard(request):
     if query:
         transakcje = transakcje.filter(opis__icontains=query)
 
+    suma_wydatkow = transakcje.filter(typ='Wydatek').aggregate(Sum('kwota'))['kwota__sum'] or 0
+    suma_przychodow = transakcje.filter(typ='Przychód').aggregate(Sum('kwota'))['kwota__sum'] or 0
+    stan_konta = suma_przychodow - suma_wydatkow
+    
     return render(request, 'folder_aplikacji/dashboard.html', {
         'budzety': budzety,
         'cele': cele,
         'transakcje': transakcje,
         'typ_filter': typ_filter,
         'query': query,
+        'suma_wydatkow': suma_wydatkow,
+        'suma_przychodow': suma_przychodow,
+        'stan_konta': stan_konta,
     })
 def dashboard_view(request):
     return render(request, 'folder_aplikacji/dashboard.html')

@@ -47,3 +47,7 @@ footer {
 .table-success {
     background-color: #d4edda;
 }
+
+.text-dark {
+    color: black;
+}
